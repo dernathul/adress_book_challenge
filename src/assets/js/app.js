@@ -13,7 +13,7 @@ const renderContacts = () => {
 
             li.innerHTML =`
              <span>${contact.name}</span> |
-             <span>${contact.email}</span>|
+             <span>${contact.email}</span> |
              <span>${contact.phone}</span>
         `
         ul.appenChild(li)
@@ -31,12 +31,13 @@ document.addEventListener('DOMContentLoader', () => {
         event.preventDefault()
 
         // 1. Read all the input fields and get their values 
-        const { name, email, phone, company, notes, twitter } = contactForm.ATTRIBUTE_NODE
+        const { name, email, phone, company, notes, twitter } = contactForm.elements
         const contact = {
             name: name.value,
             email: email.value,
             phone: phone.value,
             company: company.value,
+            notes: notes.value,
             twitter: twitter.value
         }
 
@@ -49,6 +50,6 @@ document.addEventListener('DOMContentLoader', () => {
         // 2. Save them to our storage
         storage.setItem('contacts', JSON.stringify(contacts))
         renderContacts()
-        contactForm.requestFullscreen()
+        contactForm.reset()
     })
 })
