@@ -15,18 +15,30 @@ const renderContacts = () => {
              <span>${contact.name}</span> |
              <span>${contact.email}</span> |
              <span>${contact.phone}</span>
-        `
-        ul.appenChild(li)
+            `
+            ul.appendChild(li)
         })
 
-        div.appenChild(ul)
+        div.appendChild(ul)
     } else {
         div.innerHTML = '<p>You have no contacts in your adress book</p>'
     }
 }
-document.addEventListener('DOMContentLoader', () => {
+
+document.addEventListener('DOMContentLoaded', () => {
     renderContacts()
     const contactForm = document.getElementById('new-contact-form')
+    const toggleFormVisibilityButton = document.getElementById('add-contact')
+    contactForm.style.display = 'none'
+
+    toggleFormVisibilityButton.addEventListener('click', () => {
+        if (contactForm.style.display === '') {
+            contactForm.style.display = 'none'
+        } else {
+            contactForm.style.display = ''
+        }
+    })
+    
     contactForm.addEventListener('submit', event => {
         event.preventDefault()
 
@@ -38,7 +50,7 @@ document.addEventListener('DOMContentLoader', () => {
             phone: phone.value,
             company: company.value,
             notes: notes.value,
-            twitter: twitter.value
+            twitter: twitter.value,
         }
 
         console.log(contact)
